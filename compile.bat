@@ -1,0 +1,1 @@
+pyinstaller --icon=icon.ico --onefile --name="Repo Scanner" main.py
