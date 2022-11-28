@@ -89,7 +89,7 @@ class MapModRepoScanner():
                 return False
 
             if not mapZip.valid_config_size(configStr):
-                print(f"The map {self.mapsPath}\\{_mapZip} has invalid map.config modes setting")
+                print(f"The map {self.mapsPath}\\{_mapZip} has invalid map.config size setting")
                 return False
 
         return True
