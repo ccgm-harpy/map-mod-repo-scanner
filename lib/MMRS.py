@@ -73,7 +73,7 @@ class MapModRepoScanner():
         return True
         
     def valid_maps(self):
-        mapList = listdir(self.mapsPath)
+        mapList = [m for m in listdir(self.mapsPath) if not m in self.zipScanExclusions]
 
         for _mapZip in mapList:
             mapZip = MapModZip(f"{self.mapsPath}/{_mapZip}")
