@@ -17,5 +17,5 @@ Scans Crab Game's Map Mod repo for errors. Makes fixing issues with large repo's
 **Compiling instructions:** <br />
 1. Make sure you have python3 installed with pip.
 2. Run `pip install pyinstaller` (replace "pip" with "pip3" if not found)
-3. Execute `compile.bat` on windows or `compile.sh` on Linux
+3. Execute `compile.bat` on Windows or `compile.sh` on Linux
 4. Compiled binary will be located in scriptPath/dist
