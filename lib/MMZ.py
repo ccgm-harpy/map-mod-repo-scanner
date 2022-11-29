@@ -1,5 +1,5 @@
 from zipfile import ZipFile
-import regex
+import re
 
 class MapModZip(ZipFile):
     def __init__(self, zipPath: str):
@@ -33,11 +33,11 @@ class MapModZip(ZipFile):
 
     def valid_config_size(self, configStr: str):
         searchString = f"size\[(?:" + '|'.join(self.sizeOptions) + ")\]"
-        results = regex.findall(searchString, configStr)
+        results = re.findall(searchString, configStr)
         return len(results) == 1
 
     def valid_config_modes(self, configStr: str):
-        results = regex.findall("modes\[.*\]", configStr)
+        results = re.findall("modes\[.*\]", configStr)
 
         if not results:
             return False

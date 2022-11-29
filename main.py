@@ -13,7 +13,8 @@ def clear_console():
 
 if __name__ == "__main__":
     while True:
-        print("Leave empty to use folder I'm inside of!")
+        print("Enter your repo path. Must be on your drive! URL is not supported.")
+        print("Leave empty to use folder I'm inside of.\n")
         repoPath = str(input("Repo Path-> "))
 
         if not repoPath:

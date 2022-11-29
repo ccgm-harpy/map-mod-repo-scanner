@@ -1,12 +1,13 @@
-from os import listdir
+from os import listdir, name as osName
 from os.path import isfile, isdir
 from lib.MMZ import MapModZip
 
 class MapModRepoScanner():
     def __init__(self, path):
+        self.slash = "\\" if osName == "nt" else "/"
         self.repoPath = path
-        self.mapsPath = f"{self.repoPath}/maps"
-        self.indexFilePath = f"{self.repoPath}/indexfile"
+        self.mapsPath = f"{self.repoPath}{self.slash}maps"
+        self.indexFilePath = f"{self.repoPath}{self.slash}indexfile"
         self.zipScanExclusions = [".gitkeep"]
 
     def valid_map_list(self):
@@ -14,11 +15,11 @@ class MapModRepoScanner():
 
         for file in files:
             if isdir(file):
-                print(f"Found extra directory in your maps folder '{self.mapsPath}/{file}'")
+                print(f"Found extra directory in your maps folder '{self.mapsPath}{self.slash}{file}'")
                 return False
 
             if not file.endswith(".zip"):
-                print(f"File in maps folder that's not a zip '{self.mapsPath}/{file}'")
+                print(f"File in maps folder that's not a zip '{self.mapsPath}{self.slash}{file}'")
                 return False
 
         return True
@@ -76,10 +77,10 @@ class MapModRepoScanner():
         mapList = [m for m in listdir(self.mapsPath) if not m in self.zipScanExclusions]
 
         for _mapZip in mapList:
-            mapZip = MapModZip(f"{self.mapsPath}/{_mapZip}")
+            mapZip = MapModZip(f"{self.mapsPath}{self.slash}{_mapZip}")
 
             if not mapZip.has_config():
-                print(f"The map {self.mapsPath}/{_mapZip} is missing a map.config file")
+                print(f"The map {self.mapsPath}{self.slash}{_mapZip} is missing a map.config file")
                 return False
             
             if not mapZip.has_map_files():
@@ -88,11 +89,11 @@ class MapModRepoScanner():
             configStr = mapZip.read_config()
 
             if not mapZip.valid_config_modes(configStr):
-                print(f"The map {self.mapsPath}/{_mapZip} has invalid map.config modes setting")
+                print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config modes setting")
                 return False
 
             if not mapZip.valid_config_size(configStr):
-                print(f"The map {self.mapsPath}/{_mapZip} has invalid map.config size setting")
+                print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config size setting")
                 return False
 
         return True
