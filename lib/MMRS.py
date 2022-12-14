@@ -1,6 +1,6 @@
 from os import listdir, name as osName
 from os.path import isfile, isdir
-from lib.MMZ import MapModZip
+from .MMZ import MapModZip
 
 class MapModRepoScanner():
     def __init__(self, path):
@@ -89,8 +89,11 @@ class MapModRepoScanner():
             configStr = mapZip.read_config()
 
             if not mapZip.valid_config_modes(configStr):
-                print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config modes setting")
-                return False
+                if mapZip.valid_config_lobby_map(configStr):
+                    pass
+                else:
+                    print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config modes setting")
+                    return False
 
             if not mapZip.valid_config_size(configStr):
                 print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config size setting")

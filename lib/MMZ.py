@@ -49,3 +49,11 @@ class MapModZip(ZipFile):
 
         results = results.replace(" ", "").replace("modes[]", "")
         return len(results) == 0
+
+    def valid_config_lobby_map(self, configStr: str):
+        lobbyMap = re.findall("lobbymap", configStr)
+
+        if not lobbyMap:
+            return False
+
+        return True
