@@ -66,9 +66,9 @@ class MapModRepoScanner():
 
         fileMapNames = self.map_list()
 
-        for indexMapName in indexMapNames:
+        for i, indexMapName in enumerate(indexMapNames):
             if not indexMapName in fileMapNames:
-                print(f"Indexfile contains map '{indexMapName}' which is not in your maps folder. Line #{i}")
+                print(f"Indexfile contains map '{indexMapName}' which is not in your maps folder. Line #{i+1}")
                 return False
 
         return True
