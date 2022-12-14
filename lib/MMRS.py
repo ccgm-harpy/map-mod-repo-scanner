@@ -96,8 +96,11 @@ class MapModRepoScanner():
                     return False
 
             if not mapZip.valid_config_size(configStr):
-                print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config size setting")
-                return False
+                if mapZip.valid_config_lobby_map(configStr):
+                    pass
+                else:
+                    print(f"The map {self.mapsPath}{self.slash}{_mapZip} has invalid map.config size setting")
+                    return False
 
         return True
 
